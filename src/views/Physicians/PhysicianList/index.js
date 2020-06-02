@@ -28,11 +28,7 @@ function PhysicianList() {
     const loadList = () => {
         setloading(true);
         let endPoint = "physicians"
-<<<<<<< HEAD
         UseGetApi('D', endPoint).then(result => {
-=======
-        UseGetApi('D',endPoint).then(result => {
->>>>>>> caf38529c4382e7cf72694e2c57c7b7c09174df8
             if (result.status !== 200) {
                 hangleNotification(true, result.message, 'danger')
                 setloading(false);
@@ -48,11 +44,7 @@ function PhysicianList() {
     const removerRegistro = (id) => {
 
         let endPoint = "physicians/"
-<<<<<<< HEAD
         UseDeleteApi('D', endPoint, id).then(result => {
-=======
-        UseDeleteApi('D',endPoint, id).then(result => {
->>>>>>> caf38529c4382e7cf72694e2c57c7b7c09174df8
             if (result.status !== 200) {
                 setsalert(<SweetAlert warning title={result.message} onConfirm={hideAlert} />);
                 setloading(false);
