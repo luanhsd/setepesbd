@@ -23,6 +23,11 @@ import PhysicianList from './views/Physicians/PhysicianList';
 import PhysicianForm from './views/Physicians/PhysicianForm';
 import SpecialtyList from './views/Specialties/SpecialtyList';
 
+//Scheduling
+import Schedule from './views/Scheduling/Schedule'
+import AttendanceForm from './views/Scheduling/AttendanceForm'
+import NewAttendanceForm from './views/Scheduling/NewAttendanceForm'
+
 export default [
   {
     path: "/",
@@ -99,5 +104,20 @@ export default [
     path: "/register",
     layout: Default2Layout,
     component: Register
+  },
+  {
+    path: "/schedule",
+    layout: Default2Layout,
+    component: Schedule
+  },
+  {
+    path: "/new-attendance",
+    layout: DefaultLayout,
+    component: NewAttendanceForm
+  },
+  {
+    path: "/attendance-form",
+    layout: Default2Layout,
+    component: AttendanceForm
   }
 ];
