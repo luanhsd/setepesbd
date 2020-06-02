@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom'
 import { Container, Card, CardHeader, ListGroup, ListGroupItem, Row, Col, Button, ListGroupItemHeading, ListGroupItemText } from "shards-react";
@@ -103,3 +104,14 @@ function Schedule(props) {
 };
 
 export default Schedule;
+=======
+import React from 'react';
+
+// import { Container } from './styles';
+
+function Schedule() {
+    return <div />;
+}
+
+export default Schedule;
+>>>>>>> caf38529c4382e7cf72694e2c57c7b7c09174df8
