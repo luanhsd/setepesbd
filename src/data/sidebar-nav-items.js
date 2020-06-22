@@ -3,7 +3,7 @@ export default function() {
     {
       title: 'Dashboard',
       to: '/dashboard',
-      htmlBefore: '<i class="material-icons">devices</i>',
+      htmlBefore: '<i class="material-icons">home</i>',
       htmlAfter: '',
     },
     {
@@ -47,13 +47,7 @@ export default function() {
       to: '/schedule',
       htmlBefore: '<i class="material-icons">assignment_turned_in</i>',
     },
-    /* {
-       title: "Dashboard",
-       to: "/dashboard",
-       htmlBefore: '<i class="material-icons">home</i>',
-       htmlAfter: ""
-     },
-     {
+    /*{
        title: "Forms & Componentes",
        htmlBefore: '<i class="material-icons">view_module</i>',
        to: "/components-overview",
