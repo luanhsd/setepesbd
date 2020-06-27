@@ -13,7 +13,7 @@ import {
   Col,
   Button,
   FormSelect,
-  array
+  array,
 } from "shards-react";
 import ClipLoader from "react-spinners/ClipLoader";
 import SweetAlert from "react-bootstrap-sweetalert";
@@ -39,7 +39,7 @@ function AttendanceForm(props) {
       setValue("description", dados.att_description);
     } else {
       props.history.push({
-        pathname: "/schedule"
+        pathname: "/schedule",
       });
     }
   };
@@ -61,7 +61,7 @@ function AttendanceForm(props) {
   };
 
   function setData(data) {
-    let symptons = item.att_pre_symptoms.split(",").filter(symptom => {
+    let symptons = item.att_pre_symptoms.split(",").filter((symptom) => {
       if (symptom.length !== 0) {
         return symptom.toLowerCase();
       }
@@ -73,14 +73,14 @@ function AttendanceForm(props) {
         Sintomas: symptons,
         Data_atendimento: item.att_date,
         Hospital: {
-          Id: Number(item.hos_id)
-        }
+          Id: Number(item.hos_id),
+        },
       },
       Medico: {
         CRM: item.physician.crm,
         Nome: item.physician.name,
         PrivateKey: item.physician.privateKey,
-        PubicKey: item.physician.publicKey
+        PublicKey: item.physician.publicKey,
       },
       Paciente: {
         CPF: item.patient.per_cpf,
@@ -92,7 +92,7 @@ function AttendanceForm(props) {
           Longitude: item.patient.address.add_longitude,
           Numero: item.patient.address.add_number,
           Rua: item.patient.address.add_street,
-          UF: item.patient.address.add_state
+          UF: item.patient.address.add_state,
         },
         FatorRH: item.patient.pat_rh_factor,
         GrupoSanguineo: item.patient.pat_blood_group,
@@ -100,19 +100,19 @@ function AttendanceForm(props) {
         Nascimento: item.patient.per_birth,
         Nome: item.patient.name,
         PrivateKey: item.patient.per_private_key,
-        PublicKey: item.patient.per_public_key
-      }
+        PublicKey: item.patient.per_public_key,
+      },
     };
   }
 
-  const SubmitHandler = data => {
+  const SubmitHandler = (data) => {
     setloading(true);
     const endPoint =
       "https://cors-anywhere.herokuapp.com/https://stepesbdmedrecords.herokuapp.com";
     const attendanceData = setData(data);
     console.log(attendanceData);
 
-    UsePostApiURL(endPoint, attendanceData).then(result => {
+    UsePostApiURL(endPoint, attendanceData).then((result) => {
       console.log(result);
       if (result.status !== 200) {
         setsalert(
