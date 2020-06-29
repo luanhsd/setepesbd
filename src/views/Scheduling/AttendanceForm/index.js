@@ -1,12 +1,6 @@
-<<<<<<< HEAD
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import { useForm } from 'react-hook-form';
-=======
-import React, { useState, useEffect } from "react";
-import moment from "moment";
-import { useForm } from "react-hook-form";
->>>>>>> c18aeae2b6752954646c7b3f849746baa83d9188
 import {
   Container,
   FormInput,
@@ -20,7 +14,6 @@ import {
   Button,
   FormSelect,
   array,
-<<<<<<< HEAD
 } from 'shards-react';
 import ClipLoader from 'react-spinners/ClipLoader';
 import SweetAlert from 'react-bootstrap-sweetalert';
@@ -28,15 +21,6 @@ import { UsePostApiURL } from '../../../services/apiService';
 
 import 'react-quill/dist/quill.snow.css';
 import '../../../assets/quill.css';
-=======
-} from "shards-react";
-import ClipLoader from "react-spinners/ClipLoader";
-import SweetAlert from "react-bootstrap-sweetalert";
-import { UsePostApiURL } from "../../../services/apiService";
-
-import "react-quill/dist/quill.snow.css";
-import "../../../assets/quill.css";
->>>>>>> c18aeae2b6752954646c7b3f849746baa83d9188
 
 function AttendanceForm(props) {
   const { register, handleSubmit, errors, setValue, setError } = useForm();
@@ -50,21 +34,12 @@ function AttendanceForm(props) {
     if (props.location.pasprops) {
       const dados = props.location.pasprops.item;
       setItem(dados);
-<<<<<<< HEAD
       setValue('patientName', dados.patient.name);
       setValue('sintomas', dados.att_pre_symptoms);
       setValue('description', dados.att_description);
     } else {
       props.history.push({
         pathname: '/schedule',
-=======
-      setValue("patientName", dados.patient.name);
-      setValue("sintomas", dados.att_pre_symptoms);
-      setValue("description", dados.att_description);
-    } else {
-      props.history.push({
-        pathname: "/schedule",
->>>>>>> c18aeae2b6752954646c7b3f849746baa83d9188
       });
     }
   };
@@ -72,11 +47,7 @@ function AttendanceForm(props) {
   const [loading, setloading] = React.useState(false);
 
   const handleBack = () => {
-<<<<<<< HEAD
     props.history.push('/schedule');
-=======
-    props.history.push("/schedule");
->>>>>>> c18aeae2b6752954646c7b3f849746baa83d9188
   };
 
   const [salert, setsalert] = React.useState();
@@ -86,19 +57,11 @@ function AttendanceForm(props) {
 
   const redrectAttendance = () => {
     setsalert(null);
-<<<<<<< HEAD
     window.location.replace('https://stepesbdmedrecords.herokuapp.com');
   };
 
   function setData(data) {
     let symptons = item.att_pre_symptoms.split(',').filter((symptom) => {
-=======
-    window.location.replace("https://stepesbdmedrecords.herokuapp.com");
-  };
-
-  function setData(data) {
-    let symptons = item.att_pre_symptoms.split(",").filter((symptom) => {
->>>>>>> c18aeae2b6752954646c7b3f849746baa83d9188
       if (symptom.length !== 0) {
         return symptom.toLowerCase();
       }
@@ -145,11 +108,7 @@ function AttendanceForm(props) {
   const SubmitHandler = (data) => {
     setloading(true);
     const endPoint =
-<<<<<<< HEAD
       'https://cors-anywhere.herokuapp.com/https://stepesbdmedrecords.herokuapp.com';
-=======
-      "https://cors-anywhere.herokuapp.com/https://stepesbdmedrecords.herokuapp.com";
->>>>>>> c18aeae2b6752954646c7b3f849746baa83d9188
     const attendanceData = setData(data);
     console.log(attendanceData);
 
@@ -256,11 +215,7 @@ function AttendanceForm(props) {
                         type="button"
                         onClick={handleBack}
                         theme="default"
-<<<<<<< HEAD
                         style={{ float: 'right' }}
-=======
-                        style={{ float: "right" }}
->>>>>>> c18aeae2b6752954646c7b3f849746baa83d9188
                       >
                         Voltar
                       </Button>
@@ -271,11 +226,7 @@ function AttendanceForm(props) {
             </ListGroup>
             {loading && (
               <div className="loading">
-<<<<<<< HEAD
                 <ClipLoader size={60} color={'#123abc'} loading={loading} />
-=======
-                <ClipLoader size={60} color={"#123abc"} loading={loading} />
->>>>>>> c18aeae2b6752954646c7b3f849746baa83d9188
               </div>
             )}
           </Card>

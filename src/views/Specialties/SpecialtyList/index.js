@@ -1,5 +1,5 @@
-import React, { Fragment, useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import React, { Fragment, useState, useEffect } from 'react';
+import { NavLink, useHistory } from 'react-router-dom';
 import {
   Container,
   Row,
@@ -8,13 +8,12 @@ import {
   CardHeader,
   CardBody,
   Button,
-  Alert
-} from "shards-react";
-import { UseGetApi } from "../../../services/apiService";
-import ClipLoader from "react-spinners/ClipLoader";
-import SweetAlert from "react-bootstrap-sweetalert";
-import PageTitle from "../../../components/common/PageTitle";
-import SpecialtyCard from "../../../components/Utils/SpecialtyCard";
+  Alert,
+} from 'shards-react';
+import { UseGetApi, UseDeleteApi } from '../../../services/apiService';
+import ClipLoader from 'react-spinners/ClipLoader';
+import PageTitle from '../../../components/common/PageTitle';
+import SweetAlert from 'react-bootstrap-sweetalert';
 
 function SpecialtyList() {
   const [loading, setloading] = useState(false);
@@ -22,8 +21,8 @@ function SpecialtyList() {
   const [salert, setsalert] = useState();
   const [notification, setnotification] = useState({
     show: false,
-    message: "",
-    color: "info"
+    message: '',
+    color: 'info',
   });
 
   const hangleNotification = (s, m, c) => {
@@ -36,18 +35,63 @@ function SpecialtyList() {
 
   const loadList = () => {
     setloading(true);
-    let endPoint = "specialties";
-    UseGetApi("D", endPoint).then(result => {
+    let endPoint = 'specialties';
+    UseGetApi('D', endPoint).then((result) => {
       if (result.status !== 200) {
-        hangleNotification(true, result.message, "danger");
+        hangleNotification(true, result.message, 'danger');
         setloading(false);
         return false;
       }
-      console.log(result.data.msg);
       setloading(false);
       setlist(result.data.msg);
       return true;
     });
+  };
+
+  const removerRegistro = (id) => {
+    let endPoint = 'specialties/';
+    UseDeleteApi('D', endPoint, id).then((result) => {
+      if (result.status !== 204) {
+        setsalert(
+          <SweetAlert warning title={result.message} onConfirm={hideAlert} />
+        );
+        setloading(false);
+        return false;
+      }
+
+      var listFiltered = list.filter((obj) => {
+        return obj.patId !== id;
+      });
+      setlist(listFiltered);
+      setloading(false);
+      setsalert(
+        <SweetAlert title="Deletado com sucesso!" onConfirm={hideAlert} />
+      );
+      loadList();
+      return true;
+    });
+    setsalert(null);
+  };
+
+  const hideAlert = () => {
+    setsalert(null);
+  };
+
+  const confirmDelete = (id) => {
+    setsalert(
+      <SweetAlert
+        danger
+        showCancel
+        confirmBtnText="Sim"
+        confirmBtnBsStyle="danger"
+        cancelBtnBsStyle="default"
+        title="Tem certeza que deseja remover o registro?"
+        onConfirm={() => removerRegistro(id)}
+        onCancel={hideAlert}
+      >
+        Essa ação não poderá ser desfeita!
+      </SweetAlert>
+    );
   };
 
   return (
@@ -76,11 +120,11 @@ function SpecialtyList() {
           <Col>
             <Card small className="mb-4">
               <CardHeader className="border-bottom">
-                <h6 className="m-0">Especialidades</h6>
+                <h6 className="m-0">Lista de Especialidades</h6>
 
-                <NavLink to="/physician-form">
+                <NavLink to="/specialties-form">
                   <Button
-                    style={{ right: "10px", top: "10px", position: "absolute" }}
+                    style={{ right: '10px', top: '10px', position: 'absolute' }}
                     type="submit"
                     className="mb-4"
                   >
@@ -89,13 +133,61 @@ function SpecialtyList() {
                 </NavLink>
               </CardHeader>
               <CardBody className="p-0 pb-3">
-                {list.map(item => (
-                  <SpecialtyCard specialty={item} />
-                ))}
+                <table className="table mb-0">
+                  <thead className="bg-light">
+                    <tr>
+                      <th scope="col" className="border-0">
+                        #
+                      </th>
+                      <th scope="col" className="border-0">
+                        Nome
+                      </th>
+                      <th scope="col" className="border-0">
+                        Status
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {list.map((item, index) => (
+                      <tr key={item.id}>
+                        <td>{index}</td>
+                        <td>{item.name}</td>
+                        <td>{item.status === 1 ? 'Ativo' : 'Desativado'}</td>
+
+                        <td style={{ textAlign: 'right' }}>
+                          <NavLink
+                            to={{
+                              pathname: '/specialties-form',
+                              pasprops: { item: item },
+                            }}
+                          >
+                            <Button
+                              outline
+                              size="sm"
+                              theme="info"
+                              className="mb-2 mr-1"
+                            >
+                              <i className="material-icons">edit</i> Editar
+                            </Button>
+                          </NavLink>
+                          <Button
+                            onClick={(e) => confirmDelete(item.id)}
+                            outline
+                            size="sm"
+                            theme="danger"
+                            className="mb-2 mr-1"
+                          >
+                            <i className="material-icons">delete</i> Remover
+                          </Button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
 
                 {loading && (
                   <div className="loading">
-                    <ClipLoader size={60} color={"#123abc"} loading={loading} />
+                    <ClipLoader size={60} color={'#123abc'} loading={loading} />
                   </div>
                 )}
               </CardBody>
