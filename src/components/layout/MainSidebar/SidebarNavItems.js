@@ -57,7 +57,7 @@ class SidebarNavItems extends React.Component {
           <SidebarNavItemsLink
             item={{
               title: 'Fornecedores',
-              to: 'https://juancanuto.pythonanywhere.com/',
+              to: 'http://juancanuto.pythonanywhere.com/',
               htmlBefore: '<i class="material-icons">add_shopping_cart</i>',
             }}
           />
